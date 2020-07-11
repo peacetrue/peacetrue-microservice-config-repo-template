@@ -8,35 +8,6 @@ spring:
           uri: lb://peacetrue-microservice-resource-server
           predicates:
             - Path=/resource-server/**
-        - id: peacetrue-region
-          uri: lb://peacetrue-region
-          predicates:
-            - Path=/regions/**
-        - id: peacetrue-user
-          uri: lb://peacetrue-user
-          predicates:
-            - Path=/users/**
-        - id: peacetrue-attachment
-          uri: lb://peacetrue-attachment
-          predicates:
-            - Path=/attachments/**
-
-        #biog
-        - id: biog_front
-          uri: http://localhost:3000/
-          predicates:
-            - Path=/,/*.js,/*.json,/static/**,/_next/**,/room/**
-        - id: biog_back
-          uri: http://localhost:8001/
-          predicates:
-            - Path=/games/**,/socket.io/**
-
-peacetrue:
-  static-resources:
-    '[/test/**]': file:/Users/xiayx/Documents/Projects/peacetrue-microservice/docs/antora/modules/ROOT/pages/
-    '[/summarize/**]': file:/root/peacetrue/document-antora/public/
-    '[/MP_verify_t4rKSxor2Mowtjo?.txt]': file:/usr/share/nginx/html/MP_verify_t4rKSxor2MowtjoC.txt
-#    '[/**]': http://peacetrue.cn:3000/ #TODO why failed
 
 ---
 
