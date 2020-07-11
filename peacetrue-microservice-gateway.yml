@@ -7,10 +7,9 @@ spring:
         - id: peacetrue-microservice-resource-server
           uri: lb://peacetrue-microservice-resource-server
           predicates:
-            - Path=/resource-server/**
+            - Path=/message/**
 
 ---
-
 spring.profiles: https
 
 server.port: 443

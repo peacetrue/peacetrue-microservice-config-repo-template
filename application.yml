@@ -21,9 +21,7 @@ eureka:
     serviceUrl:
       defaultZone: ${MICROSERVICE_PROTOCOL:http}://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka
 
----
-#开发环境（默认环境）
-spring.profiles: default
+management.endpoints.web.exposure.include: "*"
 
 logging.level.org.springframework: debug
 logging.level.com.github.peacetrue: debug
@@ -54,6 +52,7 @@ server:
     key-store-password: ${MICROSERVICE_SSL_PASSWORD:password}
 
 eureka.instance.securePortEnabled: true
+
 ---
 #默认输出到控制台，激活此配置切换到文件
 spring.profiles: log
@@ -84,12 +83,14 @@ spring:
           peacetrue:
             issuerUri: ${authorization-server.issuerUri}
             jwkSetUri: ${authorization-server.jwkSetUri}
-#            authorizationUri: http://${authorization-server.hostname}:${authorization-server.port}/oauth/authorize
-#            tokenUri: http://${authorization-server.hostname}:${authorization-server.port}/oauth/token
         peacetrue:
           provider: peacetrue
           redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
-
+  cloud:
+    loadbalancer:
+      ribbon:
+        # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
+        enabled: false
 ---
 #授权服务配置（UAA 完善的），默认使用 spring-security-oauth2，激活此配置使用 UAA
 spring.profiles: uaa

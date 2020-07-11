@@ -1,16 +1,3 @@
 server.port: 8530
 
-spring:
-  profiles:
-    include: authorizationclient
-  security:
-    oauth2:
-      client:
-        registration:
-          peacetrue:
-            provider: peacetrue
-            client-id: admin
-            client-secret: admin
-            scope: attachment,region,user
-            authorizationGrantType: client_credentials
-            redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
+spring.profiles.include: authorizationclient
