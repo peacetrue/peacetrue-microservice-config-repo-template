@@ -87,9 +87,10 @@ spring:
           peacetrue:
             issuerUri: ${authorization-server.issuerUri}
             jwkSetUri: ${authorization-server.jwkSetUri}
-        peacetrue:
-          provider: peacetrue
-          redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
+        registration:
+          peacetrue:
+            provider: peacetrue
+            redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
 
 ---
 #授权服务配置（UAA 完善的），默认使用 spring-security-oauth2，激活此配置使用 UAA
@@ -97,5 +98,5 @@ spring.profiles: uaa
 
 authorization-server:
   port: 8080
-  issuerUri: http://${authorization-server.hostname}:${authorization-server.port}/uaa/oauth/token
-  jwkSetUri: http://${authorization-server.hostname}:${authorization-server.port}/uaa/token_keys
+  issuerUri: ${MICROSERVICE_PROTOCOL:http}://${authorization-server.hostname}:${authorization-server.port}/uaa/oauth/token
+  jwkSetUri: ${MICROSERVICE_PROTOCOL:http}://${authorization-server.hostname}:${authorization-server.port}/uaa/token_keys
