@@ -21,7 +21,11 @@ eureka:
     serviceUrl:
       defaultZone: ${MICROSERVICE_PROTOCOL:http}://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka
 
+spring.profiles.include: uaa
+
 management.endpoints.web.exposure.include: "*"
+# 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
+spring.cloud.loadbalancer.ribbon.enabled: false
 
 logging.level.org.springframework: debug
 logging.level.com.github.peacetrue: debug
@@ -86,11 +90,7 @@ spring:
         peacetrue:
           provider: peacetrue
           redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
-  cloud:
-    loadbalancer:
-      ribbon:
-        # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
-        enabled: false
+
 ---
 #授权服务配置（UAA 完善的），默认使用 spring-security-oauth2，激活此配置使用 UAA
 spring.profiles: uaa
