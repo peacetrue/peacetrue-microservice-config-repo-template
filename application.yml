@@ -94,7 +94,7 @@ spring:
 
 ---
 #uaa https tomcat 默认 8443
-spring.profiles: uaa & https
+spring.profiles: 'uaa & https'
 
 authorization-server.port: 8443
 
