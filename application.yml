@@ -55,6 +55,8 @@ server:
     key-alias: peacetrue.cn
     key-store-password: ${MICROSERVICE_SSL_PASSWORD:password}
 
+#uaa https tomcat 默认 8443
+authorization-server.port: 8443
 eureka.instance.securePortEnabled: true
 
 ---
@@ -91,12 +93,6 @@ spring:
           peacetrue:
             provider: peacetrue
             redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
-
----
-#uaa https tomcat 默认 8443
-spring.profiles: 'uaa & https'
-
-authorization-server.port: 8443
 
 ---
 #授权服务配置（UAA 完善的），默认使用 spring-security-oauth2，激活此配置使用 UAA
