@@ -27,8 +27,8 @@ management.endpoints.web.exposure.include: "*"
 # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
 spring.cloud.loadbalancer.ribbon.enabled: false
 
-logging.level.org.springframework: trace
-logging.level.com.github.peacetrue: trace
+logging.level.org.springframework: debug
+logging.level.com.github.peacetrue: debug
 
 ---
 #生产环境
@@ -39,8 +39,8 @@ eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
 db.hostname: peacetrue.cn
 
-logging.level.org.springframework: debug
-logging.level.com.github.peacetrue: debug
+logging.level.org.springframework: trace
+logging.level.com.github.peacetrue: trace
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
