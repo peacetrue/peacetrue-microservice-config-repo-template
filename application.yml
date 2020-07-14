@@ -27,8 +27,8 @@ management.endpoints.web.exposure.include: "*"
 # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
 spring.cloud.loadbalancer.ribbon.enabled: false
 
-logging.level.org.springframework: debug
-logging.level.com.github.peacetrue: debug
+logging.level.org.springframework: trace
+logging.level.com.github.peacetrue: trace
 
 ---
 #生产环境
