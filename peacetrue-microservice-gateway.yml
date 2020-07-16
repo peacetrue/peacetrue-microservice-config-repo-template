@@ -9,21 +9,6 @@ spring:
           predicates:
             - Path=/message/**
 
-        #biog
-        - id: biog_front
-          uri: http://localhost:3000/
-          predicates:
-            - Path=/,/*.js,/*.json,/static/**,/_next/**,/room/**,/play/**
-        - id: biog_back
-          uri: http://localhost:8001/
-          predicates:
-            - Path=/games/**,/socket.io/**
-
-peacetrue:
-  static-resources:
-    '[/summarize/**]': file:/root/peacetrue/document-antora/public/
-    '[/MP_verify_t4rKSxor2Mowtjo?.txt]': file:/usr/share/nginx/html/MP_verify_t4rKSxor2MowtjoC.txt
-
 ---
 spring.profiles: https
 
