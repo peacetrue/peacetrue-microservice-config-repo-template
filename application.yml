@@ -39,8 +39,8 @@ eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
 db.hostname: peacetrue.cn
 
-logging.level.org.springframework: trace
-logging.level.com.github.peacetrue: trace
+logging.level.org.springframework: info
+logging.level.com.github.peacetrue: info
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
