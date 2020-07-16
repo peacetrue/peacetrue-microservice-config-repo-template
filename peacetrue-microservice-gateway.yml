@@ -22,7 +22,7 @@ spring:
 peacetrue:
   static-resources:
     '[/summarize/**]': file:/root/peacetrue/document-antora/public/
-    '[/download/**]': file:/root/peacetrue/download
+    '[/download/**]': file:/root/peacetrue/download/
     '[/MP_verify_t4rKSxor2Mowtjo?.txt]': file:/usr/share/nginx/html/MP_verify_t4rKSxor2MowtjoC.txt
 
 ---
