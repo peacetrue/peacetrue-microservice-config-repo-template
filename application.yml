@@ -21,7 +21,7 @@ eureka:
     serviceUrl:
       defaultZone: ${MICROSERVICE_PROTOCOL:http}://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka
 
-spring.profiles.include: uaa
+spring.profiles.include: uaa,rabbitmq
 
 management.endpoints.web.exposure.include: "*"
 # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
@@ -103,3 +103,12 @@ authorization-server:
   issuerUri: ${MICROSERVICE_PROTOCOL:http}://${authorization-server.hostname}:${authorization-server.port}/uaa/oauth/token
   jwkSetUri: ${MICROSERVICE_PROTOCOL:http}://${authorization-server.hostname}:${authorization-server.port}/uaa/token_keys
 
+---
+#消息总线通过 rabbitmq 发送消息
+spring.profiles: rabbitmq
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
