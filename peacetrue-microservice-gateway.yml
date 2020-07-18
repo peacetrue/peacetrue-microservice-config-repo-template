@@ -8,12 +8,6 @@ spring:
           uri: lb://peacetrue-microservice-resource-server
           predicates:
             - Path=/message/**
-        #添加 Github 推送转发
-        - id: github_push_forward
-          uri: https://localhost/monitor
-          predicates:
-            #判断请求头：X-GitHub-Event=push
-            - Header=X-GitHub-Event,push
         - id: test
           uri: https://www.baidu.com/
           predicates:
