@@ -8,6 +8,12 @@ spring:
           uri: lb://peacetrue-microservice-resource-server
           predicates:
             - Path=/message/**
+        - id: test
+          uri: https://www.baidu.com/
+          predicates:
+            - Path=/baidu/**
+          filters:
+            - RewritePath=/baidu,/
 
 ---
 spring.profiles: https
