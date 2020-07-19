@@ -1,0 +1,1 @@
+server.port: ${MICROSERVICE_CONFIG_PORT:8888}
