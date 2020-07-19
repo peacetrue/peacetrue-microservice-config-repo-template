@@ -25,6 +25,12 @@ spring:
           predicates:
             - Path=/games/**,/socket.io/**
 
+        #test
+        - id: baidu
+            uri: https://www.baidu.com/
+            predicates:
+              - Path=/baidu/**
+
 peacetrue:
   static-resources:
     '[/summarize/**]': file:/root/peacetrue/document-antora/public/
