@@ -27,9 +27,9 @@ spring:
 
         #test
         - id: baidu
-            uri: https://www.baidu.com/
-            predicates:
-              - Path=/baidu/**
+          uri: https://www.baidu.com/
+          predicates:
+            - Path=/baidu/**
 
 peacetrue:
   static-resources:
