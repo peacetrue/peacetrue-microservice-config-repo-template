@@ -20,12 +20,12 @@ spring:
             - Path=/baidu/**
           filters:
             - RewritePath=/baidu,/
-        - id: test2
+        - id: test3
           uri: https://www.baidu.com/
           predicates:
-            - Path=/baidu1/**
+            - Path=/baidu3/**
           filters:
-            - RewritePath=/baidu1,/
+            - RewritePath=/baidu3,/
 
 ---
 spring.profiles: https
