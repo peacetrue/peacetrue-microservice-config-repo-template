@@ -23,9 +23,9 @@ spring:
         - id: test3
           uri: https://www.baidu.com/
           predicates:
-            - Path=/baidu2/**
+            - Path=/baidu3/**
           filters:
-            - RewritePath=/baidu2,/
+            - RewritePath=/baidu3,/
 
 ---
 spring.profiles: https
