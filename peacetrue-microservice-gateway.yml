@@ -26,10 +26,10 @@ spring:
             - Path=/games/**,/socket.io/**
 
         #test
-        - id: baidu
+        - id: baidu2
           uri: https://www.baidu.com/
           predicates:
-            - Path=/baidu/**
+            - Path=/baidu2/**
 
 peacetrue:
   static-resources:
