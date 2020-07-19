@@ -7,9 +7,9 @@ spring:
         #配置中心监听
         - id: config_center_monitor
           #配置中心地址
-          uri: ${MICROSERVICE_PROTOCOL:http}://${MICROSERVICE_CONFIG_HOST:localhost}:${MICROSERVICE_CONFIG_PORT:8888}/
+          uri: ${MICROSERVICE_PROTOCOL:http}://${MICROSERVICE_CONFIG_HOST:localhost}:${MICROSERVICE_CONFIG_PORT:8888}/monitor
           predicates:
-            - Path=/monitor/**
+            - Path=/monitor
         - id: peacetrue-microservice-resource-server
           uri: lb://peacetrue-microservice-resource-server
           predicates:
