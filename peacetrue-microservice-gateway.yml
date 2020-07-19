@@ -14,18 +14,6 @@ spring:
           uri: lb://peacetrue-microservice-resource-server
           predicates:
             - Path=/message/**
-        - id: test
-          uri: https://www.baidu.com/
-          predicates:
-            - Path=/baidu/**
-          filters:
-            - RewritePath=/baidu,/
-        - id: test4
-          uri: https://www.baidu.com/
-          predicates:
-            - Path=/baidu4/**
-          filters:
-            - RewritePath=/baidu4,/
 
 ---
 spring.profiles: https
