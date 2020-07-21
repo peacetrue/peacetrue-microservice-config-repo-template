@@ -33,13 +33,13 @@ logging.level.com.github.peacetrue: debug
 ---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: https,log
+spring.profiles.include: https,log,rabbitLog
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
 db.hostname: peacetrue.cn
-#基于 java 命令执行路径，java 命令会在项目内执行
-logging.config: file:../peacetrue-microservice-common/logback-spring.xml
+spring.rabbitmq.host: peacetrue.cn
+
 logging.level.org.springframework: info
 logging.level.com.github.peacetrue: info
 
@@ -113,3 +113,18 @@ spring:
     port: 5672
     username: guest
     password: guest
+
+---
+#通过 RabbitMQ 上传日志
+spring.profiles: 'rabbitmq & rabbitmqLog & default'
+
+#基于 java 命令执行路径
+logging.config: file:peacetrue-microservice-common/logback-spring.xml
+
+---
+#通过 RabbitMQ 上传日志
+spring.profiles: 'rabbitmq & rabbitmqLog'
+
+#基于 java 命令执行路径
+logging.config: file:../peacetrue-microservice-common/logback-spring.xml
+
