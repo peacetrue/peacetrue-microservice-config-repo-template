@@ -120,13 +120,6 @@ spring:
 
 ---
 #通过 RabbitMQ 上传日志
-spring.profiles: 'rabbitmq & rabbitmqLog & default'
-
-#基于 java 命令执行路径
-logging.config: file:peacetrue-microservice-common/logback-spring.xml
-
----
-#通过 RabbitMQ 上传日志
 spring.profiles: 'rabbitmq & rabbitmqLog'
 
 #基于 java 命令执行路径
