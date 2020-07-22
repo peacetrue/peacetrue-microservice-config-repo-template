@@ -32,7 +32,7 @@ logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
 ---
 #非生产环境
-spring.profiles: !prod
+spring.profiles: '!prod'
 spring.profiles.include: consoleLog
 
 ---
