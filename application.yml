@@ -68,7 +68,7 @@ logging.file.name: logs/root.log
 #禁用控制台日志，see https://stackoverflow.com/questions/43918414/how-to-disable-console-logging-in-spring-boot
 spring.profiles: discons
 
-logging.pattern.console:
+logging.pattern.console: ''
 
 ---
 #资源服务配置
