@@ -43,6 +43,7 @@ spring.profiles.include: https,fileLog,rabbitmqLog
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
 spring.rabbitmq.host: peacetrue.cn
+spring.zipkin.base-url: http://peacetrue.cn:9411/
 
 logging.level.root: INFO
 logging.config: file:../peacetrue-microservice-common/logback-spring.xml
