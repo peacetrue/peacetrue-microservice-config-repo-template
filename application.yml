@@ -32,7 +32,7 @@ logging.level.root: DEBUG
 ---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: https,log,rabbitLog,
+spring.profiles.include: https,log,rabbitLog
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
