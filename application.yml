@@ -31,9 +31,14 @@ logging.level.root: DEBUG
 logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
 ---
+#非生产环境
+spring.profiles: !prod
+spring.profiles.include: consoleLog
+
+---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: https,discons,log,rabbitLog,rabbitmqLog
+spring.profiles.include: https,fileLog,rabbitmqLog
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
@@ -61,15 +66,9 @@ eureka.instance.securePortEnabled: true
 
 ---
 #默认输出到控制台，激活此配置切换到文件
-spring.profiles: log
+spring.profiles: fileLog
 
 logging.file.name: logs/root.log
-
----
-#禁用控制台日志，see https://stackoverflow.com/questions/43918414/how-to-disable-console-logging-in-spring-boot
-spring.profiles: discons
-
-logging.pattern.console: ''
 
 ---
 #资源服务配置
