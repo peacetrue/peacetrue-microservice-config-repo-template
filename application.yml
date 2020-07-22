@@ -27,21 +27,19 @@ management.endpoints.web.exposure.include: "*"
 # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
 spring.cloud.loadbalancer.ribbon.enabled: false
 
-logging.level.org.springframework: debug
-logging.level.com.github.peacetrue: debug
+logging.level.root: DEBUG
 
 ---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: https,log,rabbitLog
+spring.profiles.include: https,discons,log,rabbitLog,
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
-db.hostname: peacetrue.cn
 spring.rabbitmq.host: peacetrue.cn
 
-logging.level.org.springframework: info
-logging.level.com.github.peacetrue: info
+logging.level.root: INFO
+
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
@@ -65,6 +63,12 @@ eureka.instance.securePortEnabled: true
 spring.profiles: log
 
 logging.file.name: logs/root.log
+
+---
+#禁用控制台日志，see https://stackoverflow.com/questions/43918414/how-to-disable-console-logging-in-spring-boot
+spring.profiles: discons
+
+logging.pattern.console:
 
 ---
 #资源服务配置
@@ -127,4 +131,3 @@ spring.profiles: 'rabbitmq & rabbitmqLog'
 
 #基于 java 命令执行路径
 logging.config: file:../peacetrue-microservice-common/logback-spring.xml
-
