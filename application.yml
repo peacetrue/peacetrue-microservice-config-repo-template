@@ -28,6 +28,7 @@ management.endpoints.web.exposure.include: "*"
 spring.cloud.loadbalancer.ribbon.enabled: false
 
 logging.level.root: DEBUG
+logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
 ---
 #生产环境
@@ -39,7 +40,7 @@ authorization-server.hostname: peacetrue.cn
 spring.rabbitmq.host: peacetrue.cn
 
 logging.level.root: INFO
-
+logging.config: file:../peacetrue-microservice-common/logback-spring.xml
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
@@ -117,10 +118,3 @@ spring:
     port: 5672
     username: guest
     password: guest
-
----
-#通过 RabbitMQ 上传日志
-spring.profiles: 'rabbitmq & rabbitmqLog'
-
-#基于 java 命令执行路径
-logging.config: file:../peacetrue-microservice-common/logback-spring.xml
