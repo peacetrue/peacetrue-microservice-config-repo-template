@@ -27,20 +27,27 @@ management.endpoints.web.exposure.include: "*"
 # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
 spring.cloud.loadbalancer.ribbon.enabled: false
 
-logging.level.org.springframework: debug
-logging.level.com.github.peacetrue: debug
+logging.level.root: DEBUG
+#在项目内运行 java 的相对路径
+logging.config: file:peacetrue-microservice-common/logback-spring.xml
+
+---
+#非生产环境
+spring.profiles: '!prod'
+spring.profiles.include: consoleLog
 
 ---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: https,log
+spring.profiles.include: https,fileLog,rabbitmqLog,cmd
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
-db.hostname: peacetrue.cn
+spring.rabbitmq.host: peacetrue.cn
+spring.zipkin.base-url: http://peacetrue.cn:9411/
 
-logging.level.org.springframework: info
-logging.level.com.github.peacetrue: info
+logging.level.root: INFO
+
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
@@ -61,9 +68,16 @@ eureka.instance.securePortEnabled: true
 
 ---
 #默认输出到控制台，激活此配置切换到文件
-spring.profiles: log
+spring.profiles: fileLog
 
 logging.file.name: logs/root.log
+
+---
+#命令行
+spring.profiles: cmd
+
+# 通过命令行启动会在模块内运行
+logging.config: file:../peacetrue-microservice-common/logback-spring.xml
 
 ---
 #资源服务配置
