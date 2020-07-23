@@ -39,7 +39,7 @@ spring.profiles.include: consoleLog
 ---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: https,fileLog,rabbitmqLog,runmod
+spring.profiles.include: https,fileLog,rabbitmqLog,cmd
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
@@ -73,9 +73,10 @@ spring.profiles: fileLog
 logging.file.name: logs/root.log
 
 ---
-#在模块内运行 java 的相对路径
-spring.profiles: runmod
+#命令行
+spring.profiles: cmd
 
+# 通过命令行启动会在模块内运行
 logging.config: file:../peacetrue-microservice-common/logback-spring.xml
 
 ---
