@@ -28,6 +28,7 @@ management.endpoints.web.exposure.include: "*"
 spring.cloud.loadbalancer.ribbon.enabled: false
 
 logging.level.root: DEBUG
+#在项目内运行 java 的相对路径
 logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
 ---
@@ -38,7 +39,7 @@ spring.profiles.include: consoleLog
 ---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: https,fileLog,rabbitmqLog
+spring.profiles.include: https,fileLog,rabbitmqLog,runmod
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
@@ -46,7 +47,7 @@ spring.rabbitmq.host: peacetrue.cn
 spring.zipkin.base-url: http://peacetrue.cn:9411/
 
 logging.level.root: INFO
-logging.config: file:../peacetrue-microservice-common/logback-spring.xml
+
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
@@ -70,6 +71,12 @@ eureka.instance.securePortEnabled: true
 spring.profiles: fileLog
 
 logging.file.name: logs/root.log
+
+---
+#在模块内运行 java 的相对路径
+spring.profiles: runmod
+
+logging.config: file:../peacetrue-microservice-common/logback-spring.xml
 
 ---
 #资源服务配置
