@@ -15,36 +15,46 @@ spring:
 #注册客户端配置
 eureka:
   instance:
-    #优先使用 host 访问而非 ip 地址
+    #优先使用 host 访问而非 ip 地址，ip 会有 https 证书问题
     hostname: localhost
+    leaseRenewalIntervalInSeconds: 10
+    metadata-map:
+      startup: ${random.int}
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
   client:
+    registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: ${MICROSERVICE_PROTOCOL:http}://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka
 
-spring.profiles.include: uaa,rabbitmq
 
 management.endpoints.web.exposure.include: "*"
+management.endpoint.health.show-details: ALWAYS
 # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
 spring.cloud.loadbalancer.ribbon.enabled: false
+# 默认禁用 zipkin
+spring.zipkin.enabled: false
 
 logging.level.root: DEBUG
 #在项目内运行 java 的相对路径
 logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
+spring.profiles.include: uaa,rabbitmq
+
 ---
-#非生产环境
-spring.profiles: '!prod'
+#默认环境，开发环境
+spring.profiles: default
 spring.profiles.include: consoleLog
 
 ---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: https,fileLog,rabbitmqLog,cmd
+spring.profiles.include: https,fileLog,rabbitmqLog,cmd,zipkin
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
 spring.rabbitmq.host: peacetrue.cn
-spring.zipkin.base-url: http://peacetrue.cn:9411/
+spring.zipkin.base-url: http://peacetrue.cn:9411
 
 logging.level.root: INFO
 
@@ -65,6 +75,11 @@ server:
 #uaa https tomcat 默认 8443
 authorization-server.port: 8443
 eureka.instance.securePortEnabled: true
+
+---
+#zipkin，默认禁用，激活此项以启用
+spring.profiles: zipkin
+spring.zipkin.enabled: true
 
 ---
 #默认输出到控制台，激活此配置切换到文件
