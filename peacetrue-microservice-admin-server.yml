@@ -1,0 +1,5 @@
+server.port: 8500
+
+spring.boot.admin.client:
+  username: ${spring.security.user.name}
+  password: ${spring.security.user.password}
