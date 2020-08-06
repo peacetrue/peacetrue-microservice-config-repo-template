@@ -57,7 +57,7 @@ spring.rabbitmq.host: peacetrue.cn
 spring.zipkin.base-url: http://peacetrue.cn:9411
 
 logging.level.root: INFO
-
+logging.file.max-history: 1
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
