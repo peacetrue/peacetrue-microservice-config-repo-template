@@ -38,6 +38,7 @@ spring.zipkin.enabled: false
 logging.level.root: DEBUG
 #在项目内运行 java 的相对路径
 logging.config: file:peacetrue-microservice-common/logback-spring.xml
+logging.file.max-history: 1
 
 spring.profiles.include: uaa,rabbitmq
 
@@ -49,7 +50,7 @@ spring.profiles.include: consoleLog
 ---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: https,fileLog,rabbitmqLog,cmd,zipkin
+spring.profiles.include: https,fileLog,cmd,zipkin
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
@@ -57,7 +58,6 @@ spring.rabbitmq.host: peacetrue.cn
 spring.zipkin.base-url: http://peacetrue.cn:9411
 
 logging.level.root: INFO
-logging.file.max-history: 1
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
