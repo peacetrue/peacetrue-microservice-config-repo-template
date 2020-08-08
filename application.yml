@@ -92,7 +92,7 @@ logging.file.name: logs/root.log
 spring.profiles: cmd
 
 # 通过命令行启动会在模块内运行
-logging.config: file:../peacetrue-microservice-common/logback-spring.xml
+#logging.config: file:../peacetrue-microservice-common/logback-spring.xml
 
 ---
 #资源服务配置
