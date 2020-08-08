@@ -37,7 +37,7 @@ spring.zipkin.enabled: false
 
 logging.level.root: DEBUG
 #在项目内运行 java 的相对路径
-logging.config: file:peacetrue-microservice-common/logback-spring.xml
+#logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
 spring.profiles.include: uaa,rabbitmq
 
