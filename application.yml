@@ -51,10 +51,10 @@ spring.profiles.include: consoleLog
 spring.profiles: prod
 spring.profiles.include: fileLog,rabbitmqLog,cmd,zipkin
 
-eureka.instance.hostname: peacetrue.cn
+eureka.instance.hostname: www.peacetrue.cn
 authorization-server.hostname: peacetrue.cn
-spring.rabbitmq.host: peacetrue.cn
-spring.zipkin.base-url: http://peacetrue.cn:9411
+spring.rabbitmq.host: www.peacetrue.cn
+spring.zipkin.base-url: http://www.peacetrue.cn:9411
 
 logging.level.root: INFO
 
