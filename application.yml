@@ -1,6 +1,12 @@
+# common 配置，方便单机环境全局配置
+common:
+  protocol: ${MICROSERVICE_PROTOCOL:http}
+  hostname: localhost
+  url: ${common.protocol}://${common.hostname}
+
 #授权服务配置（spring-security-oauth2 过期不完善的）
 authorization-server:
-  hostname: localhost
+  hostname: ${common.hostname}
   port: 8510
   issuerUri: ${MICROSERVICE_PROTOCOL:http}://${authorization-server.hostname}:${authorization-server.port}
   jwkSetUri: ${authorization-server.issuerUri}/.well-known/jwks.json
@@ -16,7 +22,7 @@ spring:
 eureka:
   instance:
     #优先使用 host 访问而非 ip 地址，ip 会有 https 证书问题
-    hostname: localhost
+    hostname: ${common.hostname}
     leaseRenewalIntervalInSeconds: 10
     metadata-map:
       startup: ${random.int}
@@ -51,10 +57,11 @@ spring.profiles.include: consoleLog
 spring.profiles: prod
 spring.profiles.include: fileLog,rabbitmqLog,cmd,zipkin
 
-eureka.instance.hostname: www.peacetrue.cn
+common.hostname: www.peacetrue.cn
+eureka.instance.hostname: ${common.hostname}
 authorization-server.hostname: peacetrue.cn
-spring.rabbitmq.host: www.peacetrue.cn
-spring.zipkin.base-url: http://www.peacetrue.cn:9411
+spring.rabbitmq.host: ${common.hostname}
+spring.zipkin.base-url: http://${common.hostname}:9411
 
 logging.level.root: INFO
 
@@ -64,6 +71,7 @@ logging.level.root: INFO
 spring.profiles: https
 
 MICROSERVICE_PROTOCOL: https
+common.protocol: ${MICROSERVICE_PROTOCOL}
 
 server:
   ssl:
@@ -137,7 +145,13 @@ authorization-server:
 spring.profiles: rabbitmq
 spring:
   rabbitmq:
-    host: localhost
+    host: ${common.hostname}
     port: 5672
     username: guest
     password: guest
+
+---
+# mac 环境 docker 配置
+spring.profiles: dockerMac
+
+common.hostname: host.docker.internal
