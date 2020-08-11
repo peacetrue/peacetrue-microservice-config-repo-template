@@ -45,7 +45,8 @@ logging.level.root: DEBUG
 #在项目内运行 java 的相对路径
 #logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
-spring.profiles.include: uaa,rabbitmq
+# uaa,rabbitmq
+spring.profiles.include: uaa
 
 ---
 #默认环境，开发环境
@@ -55,7 +56,8 @@ spring.profiles.include: consoleLog
 ---
 #生产环境
 spring.profiles: prod
-spring.profiles.include: fileLog,rabbitmqLog,cmd,zipkin
+# fileLog,rabbitmqLog,cmd,zipkin
+spring.profiles.include: fileLog
 
 common.hostname: www.peacetrue.cn
 eureka.instance.hostname: ${common.hostname}
