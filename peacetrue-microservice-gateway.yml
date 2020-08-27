@@ -16,6 +16,6 @@ spring:
             - Path=/message/**
 
 ---
-spring.profiles: https
+spring.config.activate.on-profile: https
 
 server.port: 443
