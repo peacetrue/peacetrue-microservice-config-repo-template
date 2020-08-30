@@ -29,8 +29,8 @@ peacetrue:
   static-resources:
     '[/summarize/**]': file:/root/peacetrue/document-antora/public/
     '[/download/**]': file:/root/peacetrue/download/
-    '[/talent-admin/**]': file:/root/peacetrue/peacetrue-talent-page/peacetrue-talent-admin-page/build/
-    '[/talent-member/**]': file:/root/peacetrue/peacetrue-talent-page/peacetrue-talent-member-page/public/
+    '[/talent_admin/**]': file:/root/peacetrue/peacetrue-talent-page/peacetrue-talent-admin-page/build/
+    '[/talent_member/**]': file:/root/peacetrue/peacetrue-talent-page/peacetrue-talent-member-page/public/
     '[/MP_verify_t4rKSxor2Mowtjo?.txt]': file:/usr/share/nginx/html/MP_verify_t4rKSxor2MowtjoC.txt
 
 ---
