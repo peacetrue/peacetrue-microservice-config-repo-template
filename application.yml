@@ -9,7 +9,7 @@ authorization-server:
   hostname: ${common.hostname}
   port: 8510
   issuerUri: ${MICROSERVICE_PROTOCOL:http}://${authorization-server.hostname}:${authorization-server.port}
-#  jwkSetUri: ${authorization-server.issuerUri}/.well-known/jwks.json
+  #  jwkSetUri: ${authorization-server.issuerUri}/.well-known/jwks.json
   jwkSetUri: ${authorization-server.issuerUri}/oauth2/jwks
 
 #所有应用共用的账号
@@ -42,7 +42,11 @@ spring.cloud.loadbalancer.ribbon.enabled: false
 # 默认禁用 zipkin
 spring.zipkin.enabled: false
 
-logging.level.root: DEBUG
+logging.level.root: info
+logging.level.org.springframework: trace
+logging.level.org.springframework.amqp: info
+logging.level.org.springframework.cloud.sleuth: info
+logging.level.com.github.peacetrue: debug
 #在项目内运行 java 的相对路径
 #logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
@@ -51,12 +55,12 @@ logging.level.root: DEBUG
 
 ---
 #默认环境，开发环境
-spring.config.activate.on-profile: default
+spring.profiles: default
 spring.profiles.include: consoleLog
 
 ---
 #生产环境
-spring.config.activate.on-profile: prod
+spring.profiles: prod
 # fileLog,rabbitmqLog,cmd,zipkin
 spring.profiles.include: fileLog
 
@@ -71,7 +75,7 @@ logging.level.root: INFO
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
-spring.config.activate.on-profile: https
+spring.profiles: https
 
 MICROSERVICE_PROTOCOL: https
 common.protocol: ${MICROSERVICE_PROTOCOL}
@@ -89,54 +93,56 @@ eureka.instance.securePortEnabled: true
 
 ---
 #zipkin，默认禁用，激活此项以启用
-spring.config.activate.on-profile: zipkin
+spring.profiles: zipkin
 spring.zipkin.enabled: true
 
 ---
 #默认输出到控制台，激活此配置切换到文件
-spring.config.activate.on-profile: fileLog
+spring.profiles: fileLog
 
 logging.file.name: logs/root.log
 
 ---
 #命令行
-spring.config.activate.on-profile: cmd
+spring.profiles: cmd
 
 # 通过命令行启动会在模块内运行
 #logging.config: file:../peacetrue-microservice-common/logback-spring.xml
 
 ---
 #资源服务配置
-spring.config.activate.on-profile: resourceserver
+spring.profiles: resourceserver
 
 spring:
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuerUri: ${authorization-server.issuerUri}
+#          issuerUri: ${authorization-server.issuerUri}
           jwkSetUri: ${authorization-server.jwkSetUri}
 
 ---
 #认证客户端配置
-spring.config.activate.on-profile: authorizationclient
+spring.profiles: authorizationclient
 
 spring:
   security:
     oauth2:
       client:
         provider:
-          peacetrue:
-            issuerUri: ${authorization-server.issuerUri}
+          spring:
+            #            issuerUri: ${authorization-server.issuerUri}
             jwkSetUri: ${authorization-server.jwkSetUri}
-        registration:
-          peacetrue:
-            provider: peacetrue
-            redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            authorization-uri: ${authorization-server.issuerUri}/oauth2/authorize
+            token-uri: ${authorization-server.issuerUri}/oauth2/token
+#        registration:
+#          common:
+#            provider: peacetrue
+#            redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
 
 ---
 #授权服务配置（UAA 完善的），默认使用 spring-security-oauth2，激活此配置使用 UAA
-spring.config.activate.on-profile: uaa
+spring.profiles: uaa
 
 authorization-server:
   port: 8080
@@ -145,7 +151,7 @@ authorization-server:
 
 ---
 #消息总线通过 rabbitmq 发送消息
-spring.config.activate.on-profile: rabbitmq
+spring.profiles: rabbitmq
 spring:
   rabbitmq:
     host: ${common.hostname}
@@ -155,6 +161,6 @@ spring:
 
 ---
 # mac 环境 docker 配置
-spring.config.activate.on-profile: dockerMac
+spring.profiles: dockerMac
 
 common.hostname: host.docker.internal
