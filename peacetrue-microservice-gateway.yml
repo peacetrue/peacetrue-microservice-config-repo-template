@@ -37,3 +37,9 @@ peacetrue:
 spring.profiles: https
 
 server.port: 443
+
+---
+spring.profiles: prod
+
+logging.level.org.springframework: trace
+logging.level.com.github.peacetrue: trace
