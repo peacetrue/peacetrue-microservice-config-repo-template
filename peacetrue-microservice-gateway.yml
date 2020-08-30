@@ -14,7 +14,11 @@ spring:
           uri: lb://peacetrue-microservice-resource-server
           predicates:
             - Path=/message/**
-
+#人才库
+peacetrue:
+  static-resources:
+    '[/peacetrue-talent-admin/**]': file:/root/peacetrue/learn-docker/composes/jenkins/volumes/jenkins-data/workspace/peacetrue-talent/peacetrue-talent-admin-page/build
+    '[/peacetrue-talent-member/**]': file:/root/peacetrue/learn-docker/composes/jenkins/volumes/jenkins-data/workspace/peacetrue-talent/peacetrue-talent-member-page/public
 ---
 spring.profiles: https
 
