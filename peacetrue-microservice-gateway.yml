@@ -15,6 +15,22 @@ spring:
           predicates:
             - Path=/message/**
 
+        #子域名接口地址处理
+        - id: talent-admin-api
+          uri: http://101.200.133.86:8100
+          predicates:
+            - Host=talent-admin.peacetrue.cn
+            - Path=/api/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+        - id: talent-member-api
+          uri: http://101.200.133.86:8110
+          predicates:
+            - Host=talent-member.peacetrue.cn
+            - Path=/api/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+        #子域名静态资源处理
         - id: talent-admin
           uri: ${MICROSERVICE_PROTOCOL:http}://peacetrue.cn
           predicates:
@@ -27,6 +43,7 @@ spring:
             - Host=talent-member.peacetrue.cn
           filters:
             - PrefixPath=/talent-member
+
 
         #biog
         - id: biog_front
