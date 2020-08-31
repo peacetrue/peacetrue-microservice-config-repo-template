@@ -16,6 +16,15 @@ spring:
             - Path=/message/**
 
         #子域名接口地址处理
+        - id: talent-admin-api-session
+          uri: http://101.200.133.86:8100
+          predicates:
+            - Host=talent-admin.peacetrue.cn
+            - Path=/api/**
+            - Cookie=SESSION
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+            - RemoveResponseHeader=Set-Cookie
         - id: talent-admin-api
           uri: http://101.200.133.86:8100
           predicates:
@@ -23,7 +32,6 @@ spring:
             - Path=/api/**
           filters:
             - RewritePath=/api(?<segment>/?.*), $\{segment}
-            - SaveSession
         - id: talent-member-api
           uri: http://101.200.133.86:8110
           predicates:
