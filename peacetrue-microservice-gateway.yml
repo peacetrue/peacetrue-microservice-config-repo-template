@@ -23,6 +23,7 @@ spring:
             - Path=/api/**
           filters:
             - RewritePath=/api(?<segment>/?.*), $\{segment}
+            - SaveSession
         - id: talent-member-api
           uri: http://101.200.133.86:8110
           predicates:
@@ -30,6 +31,7 @@ spring:
             - Path=/api/**
           filters:
             - RewritePath=/api(?<segment>/?.*), $\{segment}
+            - SaveSession
         #子域名静态资源处理
         - id: talent-admin
           uri: ${MICROSERVICE_PROTOCOL:http}://peacetrue.cn
