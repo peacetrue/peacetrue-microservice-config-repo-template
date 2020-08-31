@@ -16,13 +16,13 @@ spring:
             - Path=/message/**
 
         - id: talent-admin
-          uri: ${MICROSERVICE_PROTOCOL:http}://localhost
+          uri: ${MICROSERVICE_PROTOCOL:http}://peacetrue.cn
           predicates:
             - Host=talent-admin.peacetrue.cn
           filters:
             - PrefixPath=/talent-admin
         - id: talent-member
-          uri: ${MICROSERVICE_PROTOCOL:http}://localhost
+          uri: ${MICROSERVICE_PROTOCOL:http}://peacetrue.cn
           predicates:
             - Host=talent-member.peacetrue.cn
           filters:
