@@ -21,7 +21,7 @@ spring:
           predicates:
             - Host=talent-admin.peacetrue.cn
             - Path=/api/**
-            - Cookie=SESSION
+            - Cookie=SESSION,.+
           filters:
             - RewritePath=/api(?<segment>/?.*), $\{segment}
             - RemoveResponseHeader=Set-Cookie
