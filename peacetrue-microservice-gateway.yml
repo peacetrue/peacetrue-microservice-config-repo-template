@@ -15,6 +15,19 @@ spring:
           predicates:
             - Path=/message/**
 
+        - id: talent-admin
+          uri: ${MICROSERVICE_PROTOCOL:http}://localhost
+          predicates:
+            - Host=talent-admin.peacetrue.cn
+          filters:
+            - PrefixPath=/talent-admin
+        - id: talent-member
+          uri: ${MICROSERVICE_PROTOCOL:http}://localhost
+          predicates:
+            - Host=talent-member.peacetrue.cn
+          filters:
+            - PrefixPath=/talent-member
+
         #biog
         - id: biog_front
           uri: http://localhost:3000/
@@ -29,8 +42,8 @@ peacetrue:
   static-resources:
     '[/summarize/**]': file:/root/peacetrue/document-antora/public/
     '[/download/**]': file:/root/peacetrue/download/
-    '[/talent_admin/**]': file:/root/peacetrue/peacetrue-talent-page/peacetrue-talent-admin-page/build/
-    '[/talent_member/**]': file:/root/peacetrue/peacetrue-talent-page/peacetrue-talent-member-page/public/
+    '[/talent-admin/**]': file:/root/peacetrue/peacetrue-talent-page/peacetrue-talent-admin-page/build/
+    '[/talent-member/**]': file:/root/peacetrue/peacetrue-talent-page/peacetrue-talent-member-page/public/
     '[/MP_verify_t4rKSxor2Mowtjo?.txt]': file:/usr/share/nginx/html/MP_verify_t4rKSxor2MowtjoC.txt
 
 ---
