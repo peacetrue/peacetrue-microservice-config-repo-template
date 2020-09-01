@@ -37,6 +37,8 @@ spring.zipkin.enabled: false
 
 logging.level.root: DEBUG
 logging.level.org.apache.http: INFO
+logging.level.io.netty.buffer: INFO
+logging.level.com.netflix.discovery: INFO
 #在项目内运行 java 的相对路径
 logging.config: file:peacetrue-microservice-common/logback-spring.xml
 logging.file.max-history: 1
