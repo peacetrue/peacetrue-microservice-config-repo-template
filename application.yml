@@ -9,7 +9,8 @@ authorization-server:
   hostname: ${common.hostname}
   port: 8510
   issuerUri: ${MICROSERVICE_PROTOCOL:http}://${authorization-server.hostname}:${authorization-server.port}
-  jwkSetUri: ${authorization-server.issuerUri}/.well-known/jwks.json
+  #  jwkSetUri: ${authorization-server.issuerUri}/.well-known/jwks.json
+  jwkSetUri: ${authorization-server.issuerUri}/oauth2/jwks
 
 #所有应用共用的账号
 spring:
@@ -41,17 +42,20 @@ spring.cloud.loadbalancer.ribbon.enabled: false
 # 默认禁用 zipkin
 spring.zipkin.enabled: false
 
-logging.level.root: DEBUG
+logging.level.root: info
+logging.level.org.springframework: trace
+logging.level.org.springframework.amqp: info
+logging.level.org.springframework.cloud.sleuth: info
+logging.level.com.github.peacetrue: debug
 logging.level.org.apache.http: INFO
 logging.level.io.netty.buffer: INFO
 logging.level.com.netflix.discovery: INFO
 #在项目内运行 java 的相对路径
-logging.config: file:peacetrue-microservice-common/logback-spring.xml
 logging.file.max-history: 1
 #logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
 # uaa,rabbitmq
-spring.profiles.include: uaa
+#spring.profiles.include: uaa
 
 ---
 #默认环境，开发环境
@@ -117,7 +121,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuerUri: ${authorization-server.issuerUri}
+#          issuerUri: ${authorization-server.issuerUri}
           jwkSetUri: ${authorization-server.jwkSetUri}
 
 ---
@@ -129,13 +133,15 @@ spring:
     oauth2:
       client:
         provider:
-          peacetrue:
-            issuerUri: ${authorization-server.issuerUri}
+          spring:
+            #            issuerUri: ${authorization-server.issuerUri}
             jwkSetUri: ${authorization-server.jwkSetUri}
-        registration:
-          peacetrue:
-            provider: peacetrue
-            redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            authorization-uri: ${authorization-server.issuerUri}/oauth2/authorize
+            token-uri: ${authorization-server.issuerUri}/oauth2/token
+#        registration:
+#          common:
+#            provider: peacetrue
+#            redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
 
 ---
 #授权服务配置（UAA 完善的），默认使用 spring-security-oauth2，激活此配置使用 UAA
