@@ -43,11 +43,15 @@ spring.cloud.loadbalancer.ribbon.enabled: false
 spring.zipkin.enabled: false
 
 logging.level.root: info
-logging.level.org.springframework: trace
-logging.level.org.springframework.amqp: info
-logging.level.org.springframework.cloud.sleuth: info
+logging.level.org.springframework: debug
 logging.level.com.github.peacetrue: debug
+#logging.level.org.springframework.amqp: info
+#logging.level.org.springframework.cloud.sleuth: info
+#logging.level.org.apache.http: INFO
+#logging.level.io.netty.buffer: INFO
+#logging.level.com.netflix.discovery: INFO
 #在项目内运行 java 的相对路径
+logging.file.max-history: 1
 #logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
 # uaa,rabbitmq
@@ -71,7 +75,6 @@ spring.rabbitmq.host: ${common.hostname}
 spring.zipkin.base-url: http://${common.hostname}:9411
 
 logging.level.root: INFO
-
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
