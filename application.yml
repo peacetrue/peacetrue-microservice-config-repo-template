@@ -43,7 +43,7 @@ eureka:
 
 
 management.endpoints.web.exposure.include: "*"
-management.endpoint.health.show-details: ALWAYS
+management.endpoint.health.show-details: WHEN_AUTHORIZED
 # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
 spring.cloud.loadbalancer.ribbon.enabled: false
 # 默认禁用 zipkin
