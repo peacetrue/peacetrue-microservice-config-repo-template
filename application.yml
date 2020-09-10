@@ -6,7 +6,7 @@ common:
 
 #数据库配置
 db:
-  hostname: localhost
+  hostname: ${common.hostname}
   username: ${MICROSERVICE_DB_USERNAME:root}
   password: ${MICROSERVICE_DB_PASSWORD:12345678}
   schema: common
@@ -49,16 +49,15 @@ spring.cloud.loadbalancer.ribbon.enabled: false
 # 默认禁用 zipkin
 spring.zipkin.enabled: false
 
-logging.level.root: info
-logging.level.org.springframework: trace
+logging.level.root: debug
 logging.level.org.springframework.amqp: info
 logging.level.org.springframework.cloud.sleuth: info
-logging.level.com.github.peacetrue: debug
 logging.level.org.apache.http: INFO
 logging.level.io.netty.buffer: INFO
 logging.level.com.netflix.discovery: INFO
 #在项目内运行 java 的相对路径
 logging.file.max-history: 1
+#直接读取项目内配置文件，没有通过配置指定
 #logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
 # uaa,rabbitmq
@@ -75,9 +74,9 @@ spring.profiles: prod
 # fileLog,rabbitmqLog,cmd,zipkin
 spring.profiles.include: fileLog
 
-common.hostname: www.peacetrue.cn
+common.hostname: 101.200.133.86
 eureka.instance.hostname: ${common.hostname}
-authorization-server.hostname: peacetrue.cn
+authorization-server.hostname: ${common.hostname}
 spring.rabbitmq.host: ${common.hostname}
 spring.zipkin.base-url: http://${common.hostname}:9411
 
@@ -128,7 +127,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          #          issuerUri: ${authorization-server.issuerUri}
+          # issuerUri: ${authorization-server.issuerUri}
           jwkSetUri: ${authorization-server.jwkSetUri}
 
 ---
@@ -173,6 +172,7 @@ spring.profiles: dockerMac
 common.hostname: host.docker.internal
 
 ---
+# 响应式数据库连接
 spring.profiles: r2dbc
 spring:
   r2dbc:
