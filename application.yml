@@ -4,6 +4,13 @@ common:
   hostname: localhost
   url: ${common.protocol}://${common.hostname}
 
+#数据库配置
+db:
+  hostname: localhost
+  username: ${MICROSERVICE_DB_USERNAME:root}
+  password: ${MICROSERVICE_DB_PASSWORD:12345678}
+  schema: common
+
 #授权服务配置（spring-security-oauth2 过期不完善的）
 authorization-server:
   hostname: ${common.hostname}
@@ -121,7 +128,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-#          issuerUri: ${authorization-server.issuerUri}
+          #          issuerUri: ${authorization-server.issuerUri}
           jwkSetUri: ${authorization-server.jwkSetUri}
 
 ---
@@ -134,14 +141,11 @@ spring:
       client:
         provider:
           spring:
-            #            issuerUri: ${authorization-server.issuerUri}
+            # 该配置尚不支持，如果指定会导致校验不通过，不配置不校验
+            # issuerUri: ${authorization-server.issuerUri}
             jwkSetUri: ${authorization-server.jwkSetUri}
             authorization-uri: ${authorization-server.issuerUri}/oauth2/authorize
             token-uri: ${authorization-server.issuerUri}/oauth2/token
-#        registration:
-#          common:
-#            provider: peacetrue
-#            redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
 
 ---
 #授权服务配置（UAA 完善的），默认使用 spring-security-oauth2，激活此配置使用 UAA
@@ -167,3 +171,11 @@ spring:
 spring.profiles: dockerMac
 
 common.hostname: host.docker.internal
+
+---
+spring.profiles: r2dbc
+spring:
+  r2dbc:
+    url: r2dbc:mysql://${db.hostname}:3306/${db.schema}?autoreconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${db.username}
+    password: ${db.password}

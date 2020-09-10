@@ -1,0 +1,29 @@
+server.port: 8100
+
+spring.profiles.include: authorizationclient
+
+eureka:
+  instance:
+    metadata-map:
+      user.name: admin
+      user.password: admin
+
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          common:
+#            scope: user.read,user.write
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          common:
+            provider: spring
+            client-id: peacetrue
+            client-secret: password
+            authorization-grant-type: client_credentials
+            scope: user.read,user.write

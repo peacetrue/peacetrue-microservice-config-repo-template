@@ -1,0 +1,3 @@
+server.port: 8607
+db.schema: talent
+spring.profiles.include: resourceserver,r2dbc

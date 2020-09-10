@@ -1,0 +1,14 @@
+server.port: 8100
+
+eureka:
+  instance:
+    metadata-map:
+      user.name: admin
+      user.password: admin
+
+db.schema: talent
+spring.profiles.include: r2dbc
+
+---
+spring.profiles: prod
+db.hostname: 101.200.133.86

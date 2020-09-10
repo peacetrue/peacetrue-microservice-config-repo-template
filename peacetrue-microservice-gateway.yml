@@ -55,6 +55,11 @@ spring:
           predicates:
             - Path=/games/**,/socket.io/**
 
+        - id: peacetrue-user
+          uri: lb://peacetrue-user
+          predicates:
+            - Path=/users/**
+
 peacetrue:
   static-resources:
     '[/summarize/**]': file:/root/peacetrue/document-antora/public/
