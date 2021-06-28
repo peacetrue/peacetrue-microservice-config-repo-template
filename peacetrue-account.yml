@@ -1,0 +1,7 @@
+server.port: 7777
+db.schema: common
+spring.profiles.include: resourceserver,r2dbc
+
+logging:
+  level:
+    root: info
