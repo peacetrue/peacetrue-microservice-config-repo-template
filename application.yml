@@ -39,17 +39,17 @@ logging.level.root: DEBUG
 #在项目内运行 java 的相对路径
 logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
-spring.profiles.include: uaa,rabbitmq
+#spring.profiles.include: uaa,rabbitmq
 
 ---
 #默认环境，开发环境
-spring.profiles: default
-spring.profiles.include: consoleLog
+spring.config.activate.on-profile: default
+#spring.profiles.include: consoleLog
 
 ---
 #生产环境
-spring.profiles: prod
-spring.profiles.include: https,fileLog,rabbitmqLog,cmd,zipkin
+spring.config.activate.on-profile: prod
+#spring.profiles.include: https,fileLog,rabbitmqLog,cmd,zipkin
 
 eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
@@ -61,7 +61,7 @@ logging.file.max-history: 1
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
-spring.profiles: https
+spring.config.activate.on-profile: https
 
 MICROSERVICE_PROTOCOL: https
 
@@ -78,25 +78,25 @@ eureka.instance.securePortEnabled: true
 
 ---
 #zipkin，默认禁用，激活此项以启用
-spring.profiles: zipkin
+spring.config.activate.on-profile: zipkin
 spring.zipkin.enabled: true
 
 ---
 #默认输出到控制台，激活此配置切换到文件
-spring.profiles: fileLog
+spring.config.activate.on-profile: fileLog
 
 logging.file.name: logs/root.log
 
 ---
 #命令行
-spring.profiles: cmd
+spring.config.activate.on-profile: cmd
 
 # 通过命令行启动会在模块内运行
 logging.config: file:../peacetrue-microservice-common/logback-spring.xml
 
 ---
 #资源服务配置
-spring.profiles: resourceserver
+spring.config.activate.on-profile: resourceserver
 
 spring:
   security:
@@ -108,7 +108,7 @@ spring:
 
 ---
 #认证客户端配置
-spring.profiles: authorizationclient
+spring.config.activate.on-profile: authorizationclient
 
 spring:
   security:
@@ -125,7 +125,7 @@ spring:
 
 ---
 #授权服务配置（UAA 完善的），默认使用 spring-security-oauth2，激活此配置使用 UAA
-spring.profiles: uaa
+spring.config.activate.on-profile: uaa
 
 authorization-server:
   port: 8080
@@ -134,7 +134,7 @@ authorization-server:
 
 ---
 #消息总线通过 rabbitmq 发送消息
-spring.profiles: rabbitmq
+spring.config.activate.on-profile: rabbitmq
 spring:
   rabbitmq:
     host: localhost
