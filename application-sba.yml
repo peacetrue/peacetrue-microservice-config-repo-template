@@ -1,0 +1,28 @@
+# Spring Boot Admin 配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  info:
+    env:
+      # https://stackoverflow.com/questions/72625911/spring-actuator-info-returns-an-empty-body
+      enabled: true
+
+# https://codecentric.github.io/spring-boot-admin/current/#securing-spring-boot-admin
+# 客户端在注册时，提交用户名和密码到注册中心，存在暴露风险
+spring.cloud.zookeeper:
+  discovery:
+    metadata:
+      user-name: ${spring.security.user.name}
+      user-password: ${spring.security.user.password}
+# 服务端配置默认的用户名和密码
+spring.boot.admin:
+  instance-auth:
+    enabled: true
+    default-user-name: ${spring.security.user.name}
+    default-password: ${spring.security.user.password}
+

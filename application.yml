@@ -1,3 +1,26 @@
+spring:
+  data:
+    web:
+      pageable:
+        max-page-size: 2000
+  jpa:
+    # WARN 78842 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+    open-in-view: false
+  mvc:
+    format:
+      date-time: iso
+      date: iso
+      time: iso
+#  jackson:
+#    date-format: com.fasterxml.jackson.databind.util.StdDateFormat
+#    time-zone: Asia/Shanghai
+#    locale: zh_CN
+#所有应用共用的账号
+  security:
+    user:
+      name: ${MICROSERVICE_SECURITY_USERNAME:peacetrue}
+      password: ${MICROSERVICE_SECURITY_PASSWORD:password}
+
 #授权服务配置（spring-security-oauth2 过期不完善的）
 authorization-server:
   hostname: localhost
@@ -5,46 +28,17 @@ authorization-server:
   issuerUri: ${MICROSERVICE_PROTOCOL:http}://${authorization-server.hostname}:${authorization-server.port}
   jwkSetUri: ${authorization-server.issuerUri}/.well-known/jwks.json
 
-#所有应用共用的账号
-spring:
-  security:
-    user:
-      name: ${MICROSERVICE_SECURITY_USERNAME:peacetrue}
-      password: ${MICROSERVICE_SECURITY_PASSWORD:password}
 
-#注册客户端配置
-eureka:
-  instance:
-    #优先使用 host 访问而非 ip 地址，ip 会有 https 证书问题
-    hostname: localhost
-    leaseRenewalIntervalInSeconds: 10
-    metadata-map:
-      startup: ${random.int}
-      user.name: ${spring.security.user.name}
-      user.password: ${spring.security.user.password}
-  client:
-    registryFetchIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: ${MICROSERVICE_PROTOCOL:http}://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka
-
-
-management.endpoints.web.exposure.include: "*"
-management.endpoint.health.show-details: ALWAYS
 # 禁用此项，以启用 ReactorLoadBalancerExchangeFilterFunction
 spring.cloud.loadbalancer.ribbon.enabled: false
 # 默认禁用 zipkin
-spring.zipkin.enabled: false
+#spring.zipkin.enabled: false
 
-logging.level.root: DEBUG
+#logging.level.root: DEBUG
 #在项目内运行 java 的相对路径
-logging.config: file:peacetrue-microservice-common/logback-spring.xml
+#logging.config: file:peacetrue-microservice-common/logback-spring.xml
 
 #spring.profiles.include: uaa,rabbitmq
-
----
-#默认环境，开发环境
-spring.config.activate.on-profile: default
-#spring.profiles.include: consoleLog
 
 ---
 #生产环境
@@ -55,9 +49,6 @@ eureka.instance.hostname: peacetrue.cn
 authorization-server.hostname: peacetrue.cn
 spring.rabbitmq.host: peacetrue.cn
 spring.zipkin.base-url: http://peacetrue.cn:9411
-
-logging.level.root: INFO
-logging.file.max-history: 1
 
 ---
 #默认 http 协议，激活此配置切换到 https 协议
@@ -82,17 +73,11 @@ spring.config.activate.on-profile: zipkin
 spring.zipkin.enabled: true
 
 ---
-#默认输出到控制台，激活此配置切换到文件
-spring.config.activate.on-profile: fileLog
-
-logging.file.name: logs/root.log
-
----
 #命令行
 spring.config.activate.on-profile: cmd
 
 # 通过命令行启动会在模块内运行
-logging.config: file:../peacetrue-microservice-common/logback-spring.xml
+#logging.config: file:../peacetrue-microservice-common/logback-spring.xml
 
 ---
 #资源服务配置

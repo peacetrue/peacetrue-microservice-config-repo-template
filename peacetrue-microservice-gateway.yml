@@ -13,7 +13,21 @@ spring:
         - id: peacetrue-microservice-resource-server
           uri: lb://peacetrue-microservice-resource-server
           predicates:
-            - Path=/message/**
+            - Path=/server/**
+          filters:
+            - RewritePath=/server/?(?<segment>.*), /$\{segment}
+        - id: peacetrue-microservice-client-inner
+          uri: lb://peacetrue-microservice-client-inner
+          predicates:
+            - Path=/client/**
+          filters:
+            - RewritePath=/client/?(?<segment>.*), /$\{segment}
+#        - id: peacetrue-microservice-authorization-server
+#          uri: lb://peacetrue-microservice-authorization-server
+#          predicates:
+#            - Path=/authorization/**
+#          filters:
+#            - RewritePath=/authorization/?(?<segment>.*), /$\{segment}
 
 ---
 spring.config.activate.on-profile: https

@@ -1,3 +1,8 @@
 server.port: 8520
 
 #spring.profiles.include: resourceserver
+spring:
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+
