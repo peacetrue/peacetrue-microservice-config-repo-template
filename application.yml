@@ -136,3 +136,11 @@ spring.autoconfigure.exclude:
   - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
   - org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
   - org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
+
+---
+spring.config.activate.on-profile: docker
+# docker 内运行，需要使用主机名称，主机需要和 docker 配置一致
+spring:
+  cloud:
+    zookeeper:
+      connect-string: "zookeeper:2181"
