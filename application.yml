@@ -23,7 +23,7 @@ spring:
   cloud:
     zookeeper:
       # docker 内运行，需要使用主机名称，主机需要和 docker 配置一致
-      connect-string: ${REGISTRY_HOST:localhost:2181}
+      connect-string: ${REGISTRY_HOST:localhost:2182}
 
 #授权服务配置（spring-security-oauth2 过期不完善的）
 authorization-server:
